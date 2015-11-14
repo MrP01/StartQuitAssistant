@@ -8,7 +8,7 @@ setup(
 	author="Peter Waldert",
 	author_email="peter@waldert.at",
 	url="https://github.com/MrP01/StartQuitAssistant",
-	download_url="https://github.com/MrP01/StartQuitAssistant/tarball/v0.1",
+	download_url="https://github.com/MrP01/StartQuitAssistant/tarball/0.1",
 	keywords=["application", "session"],
 	classifiers=[]
 )
