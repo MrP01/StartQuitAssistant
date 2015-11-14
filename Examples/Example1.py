@@ -7,11 +7,11 @@ class NetworkManager(Section):
 
 	def start(self, data):
 		print("Starting Network, connecting to {host}:{port}".format(**data))
-		return random.random() < 0.5    #Might work, might not
+		return random.random() < 0.5    #Returns True (indicates success) or False (indicates failure)
 
 	def quit(self):
 		print("Stopping Network, disconnecting")
-		#returns None => Assistant uses default data
+		#returns None => Assistant uses default session data
 
 class DbManager(Section):
 	def __init__(self):
@@ -19,11 +19,11 @@ class DbManager(Section):
 
 	def start(self, data):
 		print("Starting Database, opening {path}".format(**data))
-		return random.random() < 0.5    #Might work, might not
+		return random.random() < 0.5    #Returns True (indicates success) or False (indicates failure)
 
 	def quit(self):
 		print("Closing Database")
-		return {"path":"newPath.db"}
+		return {"path":"newPath.db"}    #Assistant overwrites session data
 
 class MainWindow(Section):
 	def __init__(self):
@@ -31,17 +31,21 @@ class MainWindow(Section):
 
 	def start(self, data):
 		print("Starting MainWindow, at {geometry}".format(**data))
-		return random.random() < 0.5    #Might work, might not
+		return random.random() < 0.5    #Returns True (indicates success) or False (indicates failure)
 
 	def quit(self):
-		print("Stopping Network, disconnecting")
-		#returns None => Assistant uses default data
+		print("Closing MainWindow")
+		#returns None => Assistant uses default session data
+
 
 if __name__ == '__main__':
-	assist=Assistant([
-		NetworkManager(),
-		DbManager()
-	], "LastSession.session", autoRollback=False)
+	sections=[NetworkManager(), DbManager(), MainWindow()]
+
+	assist=Assistant(
+		sections,
+		sessionFile="LastSession.session",
+		autoRollback=False)
+
 
 	if not assist.start():
 		print("- Start failed, doing rollback now")

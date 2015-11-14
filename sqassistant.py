@@ -89,7 +89,7 @@ class Assistant(object):
 
 		If a sessionFile has been set, it stores the data returned by section.quit().
 		"""
-		for section in self.sections:
+		for section in reversed(self.sections):
 			if section._started:
 				section.quit()
 		self.storeSession()
