@@ -35,7 +35,7 @@ class MainWindow(Section):
 
 	def quit(self):
 		print("Stopping Network, disconnecting")
-		return {"host":"localhost", "port":8000}
+		#returns None => Assistant uses default data
 
 if __name__ == '__main__':
 	assist=Assistant([
